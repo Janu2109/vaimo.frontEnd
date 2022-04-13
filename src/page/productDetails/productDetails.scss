@@ -9,8 +9,10 @@
     .info-container {
         background-color: yellowgreen;
         float: left;
-        width: 40%;
+        width: 38%;
         min-height: calc(100vh - 25px);
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .add-container {
