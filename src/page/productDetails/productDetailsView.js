@@ -18,10 +18,6 @@ function ProductDetailsView() {
     productInformation();
   }, []);
 
-  useEffect(() => {
-    console.log(imgSource);
-  }, [imgSource]);
-
   return (
     <div className="container">
       <ProductImage source={imgSource} />
