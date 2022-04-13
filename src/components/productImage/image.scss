@@ -1,0 +1,11 @@
+.image-container {
+    float: left;
+    width: 30%;
+    height: calc(100vh - 25px);
+
+    .product-image {
+        width: 416px;
+        height: 416px;
+        color: #FFFFFF;
+    }
+}

@@ -1,0 +1,22 @@
+.container {
+    background-color: none;
+    min-height: calc(100vh - 25px);
+    width: 1320px;
+    margin: auto;
+
+
+
+    .info-container {
+        background-color: yellowgreen;
+        float: left;
+        width: 40%;
+        min-height: calc(100vh - 25px);
+    }
+
+    .add-container {
+        background-color: burlywood;
+        float: right;
+        width: 30%;
+        min-height: calc(100vh - 25px)
+    }
+}
