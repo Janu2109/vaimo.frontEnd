@@ -2,6 +2,7 @@ import "./productDetails.scss";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import ProductImage from "../../components/productImage/index";
+import ProductInfo from "../../components/productInfo/index";
 
 function ProductDetailsView() {
   const baseURL = "https://fe-assignment.vaimo.net/";
@@ -21,7 +22,7 @@ function ProductDetailsView() {
   return (
     <div className="container">
       <ProductImage source={imgSource} />
-      <div className="info-container"></div>
+      <ProductInfo/>
       <div className="add-container"></div>
     </div>
   );
