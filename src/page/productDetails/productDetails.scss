@@ -4,6 +4,79 @@
     width: 1320px;
     margin: auto;
 
+    .info-container {
+        float: left;
+        width: 38%;
+        min-height: calc(100vh - 25px);
+        margin-left: 10px;
+        margin-right: 10px;
+
+        .badges{
+            height: 20px;
+            width: 271px;
+            border-radius: 2px 0 0 2px;
+            display: inline-flex;
+
+            .ready-to-ship{
+                width: 90px;
+                height: 20px;
+                background-image: linear-gradient(270deg, #F5515F 0%, #FF7527 100%);
+                border-radius: 2px 0 0 2px;
+                text-align: center;
+
+                span{
+                    color: #FFFFFF;
+                    font-family: Roboto;
+                    font-size: 12px;
+                    line-height: 16px;
+                }
+            }
+
+            .badge-icon{
+                color: #FF6600;
+                height: 15px;
+                float: left;
+                transform: translateY(2px) !important;
+            }
+
+            .in-stock{
+                background-color: #FFF0E6;
+                width: 75px;
+                height: 20px;
+                border-radius: 2px 0 0 2px;
+                text-align: center;
+
+                span{
+                    color: #FF6600;
+                    font-family: Roboto;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    transform: translateY(2px) !important;
+                    float: left;
+                }
+            }
+
+            .fast-dispatch{
+                background-color: #FFF0E6;
+                width: 106px;
+                height: 20px;
+                border-radius: 2px 0 0 2px;
+                text-align: center;
+
+                span{
+                    color: #FF6600;
+                    font-family: Roboto;
+                    font-size: 12px;
+                    line-height: 16px;
+                    text-align: left;
+                    transform: translateY(2px) !important;
+                    float: left;
+                }
+            }
+        }
+    }
+
     .add-container {
         background-color: burlywood;
         float: right;
