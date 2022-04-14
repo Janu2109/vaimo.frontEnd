@@ -1,13 +1,14 @@
 .container {
     background-color: none;
-    min-height: calc(100vh - 25px);
+    padding-top: 40px;
+    min-height: calc(100vh - 65px);
     width: 1320px;
     margin: auto;
 
     .info-container {
         float: left;
         width: 38%;
-        min-height: calc(100vh - 25px);
+        min-height: calc(100vh - 65px);
         margin-left: 10px;
         margin-right: 10px;
 
@@ -81,6 +82,6 @@
         background-color: burlywood;
         float: right;
         width: 30%;
-        min-height: calc(100vh - 25px)
+        min-height: calc(100vh - 65px)
     }
 }
