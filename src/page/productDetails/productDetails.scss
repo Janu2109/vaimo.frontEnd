@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 .container {
     background-color: none;
     padding-top: 40px;
@@ -27,7 +29,7 @@
 
                 span{
                     color: #FFFFFF;
-                    font-family: Roboto;
+                    font-family: 'Roboto', sans-serif;
                     font-size: 12px;
                     line-height: 16px;
                 }
@@ -49,7 +51,7 @@
 
                 span{
                     color: #FF6600;
-                    font-family: Roboto;
+                    font-family: 'Roboto', sans-serif;
                     font-size: 12px;
                     line-height: 16px;
                     text-align: left;
@@ -67,13 +69,56 @@
 
                 span{
                     color: #FF6600;
-                    font-family: Roboto;
+                    font-family: 'Roboto', sans-serif;
                     font-size: 12px;
                     line-height: 16px;
                     text-align: left;
                     transform: translateY(2px) !important;
                     float: left;
                 }
+            }
+        }
+
+        .product-title{
+            display:block;
+            max-width: 100%;
+            margin-top: 10px;
+            color: #333333;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px ;
+            line-height: 24px;
+            width: 526px;
+            text-align: left;
+
+            .hot-sale-products{
+                background-color: #EDF0F3;
+                border-radius: 2px;
+                width: 111px;
+                height: 20px;
+                color: #999999;
+                font-size: 12px;
+                line-height: 16px;
+                text-align: left;
+            }
+        }
+
+        .ratings-box{
+            width: 46%;
+            height: 16px;
+            display: flex;
+
+            div{
+                width: 60px;
+            }
+
+            .rating-number{
+                margin-left: 1px;
+                color: #FF6600;
+                font-family: Roboto;
+                font-size: 12px;
+                line-height: 16px;
+                text-align: left;
+                transform: translateY(2.6px);
             }
         }
     }
