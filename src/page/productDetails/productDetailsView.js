@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import ProductImage from "../../components/productImage/index";
 import { UilCheckCircle } from "@iconscout/react-unicons";
 import ReactStars from "react-rating-stars-component";
+import marchExpo from '../../images/marchexpo.png';
+import arrow from '../../images/arrow.png';
 
 function ProductDetailsView() {
   const baseURL = "https://fe-assignment.vaimo.net/";
@@ -209,6 +211,12 @@ function ProductDetailsView() {
           <span className="options">2 Options</span>
           <span className="min-order">(Min. Order)</span>
           <p className="old-price"><s>{OldMinPrice()} - {OldMaxPrice()}</s></p>
+        </div>
+        <div className="march-expo">
+          <img alt='march expo' src={marchExpo} className='logo'/>
+          <span className="free-shipping">• Free shipping (up to $40)</span>
+          <span className="delivery">• On-time delivery guaranteed</span>
+          <img alt="arrow" src={arrow} className='arrow'/>
         </div>
       </div>
       <div className="add-container"></div>
