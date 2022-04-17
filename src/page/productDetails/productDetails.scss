@@ -2,10 +2,10 @@
 
 .container {
     background-color: none;
-    padding-top: 40px;
     min-height: calc(100vh - 65px);
     width: 1320px;
     margin: auto;
+    margin-top: 48px;
 
     .info-container {
         float: left;
@@ -343,10 +343,119 @@
     }
 
     .add-container {
-        background-color: burlywood;
         float: right;
         width: 30%;
-        min-height: calc(100vh - 65px);
-        
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+        background-color: #FFFFFF;
+        border-radius: 8px;
+
+        .left-top {
+            float: left;
+            width: 45%;
+            padding-left: 24px;
+            margin-top: 28px;
+
+            .ship-title {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: left;
+            }
+        }
+
+        .right-top {
+            display: inline;
+            float: right;
+            width: 40%;
+            text-align: right;
+            padding-right: 24px;
+            margin-top: 28px;
+            height: 36px;
+
+
+            .ship-total {
+                color: #333333;
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+                line-height: 24px;
+                text-align: right;
+                font-weight: 600;
+
+            }
+        }
+
+        .lead-shipping-times {
+            margin-top: 12px;
+            float: left;
+            padding-left: 24px;
+
+            .sub-text {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: left;
+            }
+
+            .sub-text-shipping {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 35px;
+                text-align: left;
+                margin-top: 12px;
+
+            }
+
+            img {
+                margin-left: 10px;
+                transform: translateY(2px);
+            }
+        }
+
+        .right-btn-container{
+            align-content: center;
+
+            .login-btn {
+                background-color: #FF6600;
+                border-radius: 20px;
+                width: 258px;
+                height: 40px;
+                color: #FFFFFF;
+                font-family: Roboto;
+                font-size: 14px;
+                line-height: 20px;
+                width: 210px;
+                text-align: center;
+                border: none;
+                transform: translateX(45%);
+                margin-top: 16px;
+            }
+
+            .contact-btn {
+                font-size: 14px;
+                line-height: 20px;
+                width: 210px;
+                text-align: center;
+                border: none;
+                background-color: rgba(255, 255, 255, 0);
+                border-radius: 20px;
+                height: 40px;
+                background-color: rgba(255, 255, 255, 0);
+                border: 1px solid #FF6600;
+                color: #FF6600;
+                transform: translateX(45%);
+                margin-top: 12px;
+                margin-bottom: 24px;
+
+                img{
+                    transform: translateY(1px);
+                    margin-right: 12px;
+                }
+            }
+        }
+
+       
     }
 }

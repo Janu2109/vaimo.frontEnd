@@ -1,0 +1,113 @@
+.qty-rocker {
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    display: inline-block;
+    transform: translateY(-20px);
+
+    .options {
+       
+        float: left;
+        width: 20%;
+
+        p {
+            color: #999999;
+            font-size: 14px;
+            line-height: 16px;
+            width: 112px;
+            text-align: left;
+            transform: translateY(32px);
+        }
+    }
+
+    .rocker {
+        
+        float: right;
+        width: 80%;
+        margin-top: 12px;
+
+        .option-container {
+            float: left;
+            width: 40%;
+
+            .option-label {
+                color: #333333;
+                font-size: 14px;
+                line-height: 16px;
+                width: 174px;
+                text-align: left;
+                display: block;
+                transform: translateY(35px);
+                margin-bottom: 25px;
+            }
+        }
+
+        .price-container {
+            float: left;
+            width: 15%;
+
+            .price-label {
+                color: #333333;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: left;
+                margin-bottom: 0px;
+                display: block;
+                transform: translateY(35px);
+                margin-bottom: 25px;
+            }
+        }
+
+        .rocker-container{
+            float: right;
+            width: 45%;
+            transform: translateY(10px);
+            .rocker{
+                width: 90%;
+                height: 40px;
+                display: flex;
+                margin-bottom: 5px;
+                
+
+                .minus{
+                    float: left;
+                    width: 25%;
+                    height: 40px;
+                    border: 1px solid rgba(153, 153, 153, 0.5);
+                    border-radius: 0 2px 2px 0;
+                    cursor: pointer;
+                    text-align: center;
+                    
+                    img{
+                        transform: translateY(5px);
+                    }
+                }
+
+                .qty{
+                    float: left;
+                    width: 50%;
+                    height: 40px;
+                    border-top: 1px solid rgba(153, 153, 153, 0.5);
+                    border-bottom: 1px solid rgba(153, 153, 153, 0.5);
+                    border-radius: 0 2px 2px 0;
+                }
+
+                .plus-active{
+                    float: right;
+                    width: 25%;
+                    height: 40px;
+                    border: 1px solid #FF6600;
+                    border-radius: 0 2px 2px 0;
+                    cursor: pointer;
+
+                    text-align: center;
+                    
+                    img{
+                        transform: translateY(12px);
+                    }
+                }
+            }
+        }
+
+    }
+}
