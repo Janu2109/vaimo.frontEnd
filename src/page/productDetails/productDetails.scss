@@ -55,7 +55,7 @@
                     font-size: 12px;
                     line-height: 16px;
                     text-align: left;
-                    transform: translateY(2px) ;
+                    transform: translateY(2px);
                     float: left;
                 }
             }
@@ -73,7 +73,7 @@
                     font-size: 12px;
                     line-height: 16px;
                     text-align: left;
-                    transform: translateY(2px) ;
+                    transform: translateY(2px);
                     float: left;
                 }
             }
@@ -214,33 +214,130 @@
                 height: 100%;
             }
 
-            .free-shipping{
+            .free-shipping {
                 color: #FF6600;
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 line-height: 16px;
                 text-align: left;
-                font-weight: 600;
-                transform: translateY(14px) ;
+                transform: translateY(14px);
                 margin-left: 20px;
                 margin-right: 20px;
             }
 
-            .delivery{
+            .delivery {
                 color: #FF6600;
                 font-family: 'Roboto', sans-serif;
                 font-size: 14px;
                 line-height: 16px;
                 text-align: left;
-                font-weight: 600;
-                transform: translateY(14px) ;
+                transform: translateY(14px);
             }
 
-            .arrow{
+            .arrow {
                 width: 8px;
                 height: 14px;
-                transform: translateY(14px) ;
+                transform: translateY(14px);
                 margin-left: 20px;
+            }
+        }
+
+        .countdown-timer {
+            width: 100%;
+            margin-top: 25px;
+
+            .discount-amount {
+                color: #FF6600;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: left;
+            }
+
+            .discount-text {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: left;
+                margin-left: 5px;
+            }
+
+            .discount-clock {
+                height: 16px;
+                width: 16px;
+                margin-left: 18px;
+                transform: translateY(2px);
+                margin-right: 10px;
+            }
+
+            .countdown-clock {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+                line-height: 24px;
+                text-align: left;
+            }
+        }
+
+        .trade-assurance {
+            width: 100%;
+            margin-top: 24px;
+
+            img {
+                width: 12px;
+                height: 14px;
+                transform: translateY(2px);
+            }
+
+            .main-text {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: left;
+                margin-left: 5px;
+                font-weight: 600;
+            }
+
+            .sub-text {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 12px;
+                line-height: 16px;
+                text-align: left;
+                margin-left: 5px;
+            }
+        }
+
+        .payments {
+            margin-top: 12px;
+
+            span {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 12px;
+                line-height: 16px;
+                text-align: left;
+                margin-right: 4px;
+            }
+
+            img {
+                margin-right: 4px;
+                transform: translateY(2px);
+            }
+        }
+
+        .links {
+            margin-top: 12px;
+
+            .link {
+                color: #999999;
+                font-family: 'Roboto', sans-serif;
+                font-size: 12px;
+                line-height: 16px;
+                text-align: left;
+                margin-right: 24px;
             }
         }
     }
@@ -250,5 +347,6 @@
         float: right;
         width: 30%;
         min-height: calc(100vh - 65px);
+        
     }
 }

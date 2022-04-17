@@ -4,8 +4,15 @@ import { useCallback, useEffect, useState } from "react";
 import ProductImage from "../../components/productImage/index";
 import { UilCheckCircle } from "@iconscout/react-unicons";
 import ReactStars from "react-rating-stars-component";
-import marchExpo from '../../images/marchexpo.png';
-import arrow from '../../images/arrow.png';
+import marchExpo from "../../images/marchexpo.png";
+import arrow from "../../images/arrow.png";
+import clock from "../../images/clock.png";
+import moment from "moment";
+import securityLock from '../../images/securityLock.png';
+import visa from '../../images/visa.svg';
+import master from '../../images/master.svg';
+import apple from '../../images/apple.svg';
+
 
 function ProductDetailsView() {
   const baseURL = "https://fe-assignment.vaimo.net/";
@@ -13,12 +20,10 @@ function ProductDetailsView() {
   var oldMinPrice = 0;
 
   var oldMaxPrice = 0;
-  
+
   var newMinPrice = 0;
 
   var newMaxPrice = 0;
-
-
 
   const [responseObject, setResponseObject] = useState({
     name: "",
@@ -32,7 +37,7 @@ function ProductDetailsView() {
             code: "",
             symbol: "",
             format: "",
-          }
+          },
         },
         old_price: {
           value: 0,
@@ -102,73 +107,115 @@ function ProductDetailsView() {
     productInformation();
   }, []);
 
-  function OldMinPrice(){
+  function OldMinPrice() {
     var oldPrices = [];
-      for(var i in responseObject.options){
-        oldPrices.push(responseObject.options[i].old_price.value);
-      }
-      
-      oldMinPrice  = Math.min.apply(Math, oldPrices);
-      const formatter = new Intl.NumberFormat('en-ZA', {
-        style: 'currency',
-        currency: 'ZAR',
-        minimumFractionDigits: 2
-      })
-
-      // return newMinPrice;
-      return formatter.format(oldMinPrice)
-  }
-
-  function OldMaxPrice(){
-    var oldPrices = [];
-    for(var i in responseObject.options){
+    for (var i in responseObject.options) {
       oldPrices.push(responseObject.options[i].old_price.value);
     }
-    
-    oldMaxPrice  = Math.max.apply(Math, oldPrices);
-    const formatter = new Intl.NumberFormat('en-ZA', {
-      style: 'currency',
-      currency: 'ZAR',
-      minimumFractionDigits: 2
-    })
 
-    // return newMinPrice;
+    oldMinPrice = Math.min.apply(Math, oldPrices);
+    const formatter = new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+      minimumFractionDigits: 2,
+    });
+
+    return formatter.format(oldMinPrice);
+  }
+
+  function OldMaxPrice() {
+    var oldPrices = [];
+    for (var i in responseObject.options) {
+      oldPrices.push(responseObject.options[i].old_price.value);
+    }
+
+    oldMaxPrice = Math.max.apply(Math, oldPrices);
+    const formatter = new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+      minimumFractionDigits: 2,
+    });
+
     return formatter.format(oldMaxPrice);
   }
 
-  function NewMinPrice(){
+  function NewMinPrice() {
     var newPrices = [];
-      for(var i in responseObject.options){
-        newPrices.push(responseObject.options[i].price.value);
-      }
-      
-      newMinPrice  = Math.min.apply(Math, newPrices);
-      const formatter = new Intl.NumberFormat('en-ZA', {
-        style: 'currency',
-        currency: 'ZAR',
-        minimumFractionDigits: 2
-      })
-
-      // return newMinPrice;
-      return formatter.format(newMinPrice)
-  }
-
-  function NewMaxPrice(){
-    var newPrices = [];
-    for(var i in responseObject.options){
+    for (var i in responseObject.options) {
       newPrices.push(responseObject.options[i].price.value);
     }
-    
-    newMaxPrice  = Math.max.apply(Math, newPrices);
-    const formatter = new Intl.NumberFormat('en-ZA', {
-      style: 'currency',
-      currency: 'ZAR',
-      minimumFractionDigits: 2
-    })
 
-    // return newMinPrice;
-    return formatter.format(newMaxPrice)
+    newMinPrice = Math.min.apply(Math, newPrices);
+    const formatter = new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+      minimumFractionDigits: 2,
+    });
+
+    return formatter.format(newMinPrice);
   }
+
+  function NewMaxPrice() {
+    var newPrices = [];
+    for (var i in responseObject.options) {
+      newPrices.push(responseObject.options[i].price.value);
+    }
+
+    newMaxPrice = Math.max.apply(Math, newPrices);
+    const formatter = new Intl.NumberFormat("en-ZA", {
+      style: "currency",
+      currency: "ZAR",
+      minimumFractionDigits: 2,
+    });
+
+    return formatter.format(newMaxPrice);
+  }
+
+ var endDate = moment(responseObject.discount.end_date).format('YYYY-MM-DD HH:m:s');
+
+ const calculateTimeLeft = () => {
+   const difference = +new Date(endDate) - +new Date();
+
+   let timeLeft = {};
+
+   if (difference > 0) {
+    timeLeft = {
+      d: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      h: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      m: Math.floor((difference / 1000 / 60) % 60),
+      s: Math.floor((difference / 1000) % 60)
+    };
+  }
+
+  return timeLeft;
+ }
+
+ const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+ useEffect(() => {
+  const timer = setTimeout(() => {
+    setTimeLeft(calculateTimeLeft());
+  }, 1000);
+  console.log(timer);
+
+  return () => clearTimeout(timer);
+});
+
+const timerComponents = [];
+
+console.log('TimeLeft',timeLeft);
+
+Object.keys(timeLeft).forEach((interval) => {
+  if (!timeLeft[interval]) {
+    return;
+  }
+
+  timerComponents.push(
+    <span className="countdown-clock">
+      {timeLeft[interval]}{interval}{" "}
+    </span>
+  );
+});
 
   return (
     <div className="container">
@@ -200,24 +247,66 @@ function ProductDetailsView() {
           )}
         </div>
         <div className="ratings-box">
-          {rating > 0 && <ReactStars count={5} value={rating} edit={false} size={14} isHalf={true} activeColor="#FF6600"/>}
+          {rating > 0 && (
+            <ReactStars
+              count={5}
+              value={rating}
+              edit={false}
+              size={14}
+              isHalf={true}
+              activeColor="#FF6600"
+            />
+          )}
           <span className="rating-number">{responseObject.reviews.rating}</span>
-          <span className="total-reviews">{responseObject.reviews.count} Reviews</span>
-          <span className="total-buyers">{responseObject.reviews.total_buyers} buyers</span>
+          <span className="total-reviews">
+            {responseObject.reviews.count} Reviews
+          </span>
+          <span className="total-buyers">
+            {responseObject.reviews.total_buyers} buyers
+          </span>
         </div>
         <div className="price-box">
-          <span className="new-price">{NewMinPrice()} - {NewMaxPrice()}</span>
+          <span className="new-price">
+            {NewMinPrice()} - {NewMaxPrice()}
+          </span>
           <span className="per-option">/ option</span>
           <span className="options">2 Options</span>
           <span className="min-order">(Min. Order)</span>
-          <p className="old-price"><s>{OldMinPrice()} - {OldMaxPrice()}</s></p>
+          <p className="old-price">
+            <s>
+              {OldMinPrice()} - {OldMaxPrice()}
+            </s>
+          </p>
         </div>
         <div className="march-expo">
-          <img alt='march expo' src={marchExpo} className='logo'/>
+          <img alt="march expo" src={marchExpo} className="logo" />
           <span className="free-shipping">• Free shipping (up to $40)</span>
           <span className="delivery">• On-time delivery guaranteed</span>
-          <img alt="arrow" src={arrow} className='arrow'/>
+          <img alt="arrow" src={arrow} className="arrow" />
         </div>
+        <div className="countdown-timer">
+          <span className="discount-amount">
+            {responseObject.discount.amount} OFF
+          </span>
+          <span className="discount-text">Discount ends in</span>
+          <img className="discount-clock" src={clock} alt="Discount clock" />
+          {timerComponents}
+        </div>
+        <div className="trade-assurance">
+          <img src={securityLock} alt='Security lock'/>
+          <span className="main-text">Trade Assurance</span>
+          <span className="sub-text">protects your Alibaba.com orders</span>
+        </div>
+        <div className="payments">
+          <span>Payments:</span>
+          <img src={visa} alt='visa'/>
+          <img src={master} alt='master'/>
+          <img src={apple} alt='apple'/>
+        </div>
+        <div className="links">
+          <span className="link">Alibaba.com Logistics</span>
+          <span className="link">Inspection Solutions</span>
+          </div>
       </div>
       <div className="add-container"></div>
     </div>
