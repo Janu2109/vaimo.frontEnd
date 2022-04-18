@@ -27,6 +27,12 @@ function ProductDetailsView() {
 
   var newMaxPrice = 0;
 
+  const maxValue = 10;
+
+  const minValue = 0;
+
+  const increment = 1;
+
   const [responseObject, setResponseObject] = useState({
     name: "",
     tags: [],
@@ -97,9 +103,6 @@ function ProductDetailsView() {
   const productInformation = useCallback(() => {
     axios.get(baseURL).then((res) => {
       setResponseObject(res.data.product);
-      console.log(res.data.product);
-      OldMinPrice();
-      OldMaxPrice();
     });
   });
 
@@ -123,6 +126,8 @@ function ProductDetailsView() {
     });
 
     return formatter.format(oldMinPrice);
+
+    
   }
 
   function OldMaxPrice() {
@@ -305,7 +310,7 @@ function ProductDetailsView() {
           <img className="discount-clock" src={clock} alt="Discount clock" />
           {timerComponents}
         </div>
-          <QtyRocker responseObject={responseObject}/>
+          <QtyRocker responseObject={responseObject} minValue={minValue} maxValue={maxValue} incrementValue={increment}/>
         <div className="trade-assurance">
           <img src={securityLock} alt="Security lock" />
           <span className="main-text">Trade Assurance</span>
@@ -335,9 +340,11 @@ function ProductDetailsView() {
         </div>
         <div className="lead-shipping-times">
             <span className="sub-text">Lead Time <b>{responseObject.shipping.lead_time.value}</b></span>
-            <img className="lead-icon"  src={info} alt='info icon'/><br />
-            <span className="sub-text-shipping">Shipping time <b>{responseObject.shipping.method.shipping_time.value}</b></span>
             <img className="lead-icon"  src={info} alt='info icon'/>
+            <span class="tooltiptext">{responseObject.shipping.lead_time.info} {responseObject.shipping.lead_time.value}</span><br />
+            <span className="sub-text-shipping">Shipping time <b>{responseObject.shipping.method.shipping_time.value}</b></span>
+            <img className="shipping-icon"  src={info} alt='info icon'/>
+            <span class="shipping-tooltip">{responseObject.shipping.method.shipping_time.info}</span><br />
         </div>
         <div className="right-btn-container">
         <button className="login-btn">Login to Purchase</button>

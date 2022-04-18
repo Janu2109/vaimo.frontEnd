@@ -1,9 +1,20 @@
 import "./qtyRocker.scss";
 import minus from '../../images/minus.png';
 import plus from '../../images/plus.png';
+import { useState } from "react";
+import { useEffect } from "react";
 
-function QtyRockerView({ responseObject }) {
-  const options = [];
+function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
+   var options = [];
+   
+    for (var i in responseObject.options) {
+      options.push({
+        label: responseObject.options[i].label,
+        price: responseObject.options[i].price.value,
+        qtySelected: 0,
+        lastCorrectQty: 0
+      });
+   }
 
   function OptionPrice(price) {
     const formatter = new Intl.NumberFormat("en-ZA", {
@@ -15,6 +26,19 @@ function QtyRockerView({ responseObject }) {
 
     return formatter.format(price);
   }
+
+  function GetQtySelected(index){
+    return options[index].qtySelected;
+  }
+
+  function Increase(index){
+    if(options[index].qtySelected < maxValue + 1){
+      options[index].qtySelected = 5
+    }
+
+  }
+
+  function Decrease(index){}
 
   return (
     <div className="qty-rocker">
@@ -43,12 +67,12 @@ function QtyRockerView({ responseObject }) {
           ))}
         </div>
         <div className="rocker-container">
-          {Object.keys(responseObject.options).map((option) => (
+          {Object.keys(responseObject.options).map((option,index) => (
             <>
               <div className="rocker">
-                <div className="minus"><img src={minus} alt='minus'/></div>
-                <div className="qty"></div>
-                <div className="plus-active"><img src={plus} alt='plus'/></div>
+                <div className="minus" id={'minus-'+index}><img src={minus} alt='minus'/></div>
+                <div className="qty"><input className='input-field' placeholder={GetQtySelected(index)}/></div>
+                <div className="plus-active" id={'plus-'+index} onClick={() => Increase(index)}><img src={plus} alt='plus'/></div>
               </div>
             </>
           ))}

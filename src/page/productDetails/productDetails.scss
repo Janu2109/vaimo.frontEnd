@@ -412,6 +412,46 @@
                 margin-left: 10px;
                 transform: translateY(2px);
             }
+
+            .tooltiptext {
+                visibility: hidden;
+                width: 200px;
+                background-color: #FF6600;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                margin-left: 10px;
+                transform: translateY(-5px) !important;
+              
+                /* Position the tooltip */
+                position: absolute;
+                z-index: 1;
+              }
+
+            .lead-icon:hover + .tooltiptext {
+                visibility: visible;
+              }
+
+              .shipping-tooltip {
+                visibility: hidden;
+                width: 200px;
+                background-color: #FF6600;
+                color: #fff;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 0;
+                margin-left: 10px;
+                transform: translateY(-5px) !important;
+              
+                /* Position the tooltip */
+                position: absolute;
+                z-index: 1;
+              }
+
+              .shipping-icon:hover + .shipping-tooltip {
+                visibility: visible;
+              }
         }
 
         .right-btn-container{
