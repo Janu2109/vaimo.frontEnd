@@ -38,8 +38,6 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
 
   }
 
-  function Decrease(index){}
-
   return (
     <div className="qty-rocker">
       <div className="options">
