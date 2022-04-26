@@ -19,40 +19,42 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
   }
 
   function AddItem(option) {
-      console.log('Response Options', responseObject.options[option]);
     if (options.length === 0) {
       const newItem = {
         label: responseObject.options[option].label,
         value: responseObject.options[option].price.value,
         qtySelected: incrementValue,
         lastCorrectQty: incrementValue,
-        totalPrice: responseObject.options[option].price.value
+        totalPrice: responseObject.options[option].price.value,
       };
       const newItems = [...options, newItem];
       setOptions(newItems);
     } else if (options.length > 0) {
       var containsItem = false;
-      for(var item in options){
-        if(options[item].label === responseObject.options[option].label){
+      for (var item in options) {
+        if (options[item].label === responseObject.options[option].label) {
           containsItem = true;
-          if(options[item].qtySelected + incrementValue < maxValue + 1){
-            options[item].qtySelected = options[item].qtySelected + incrementValue;
-            options[item].totalPrice = (options[item].value * options[item].qtySelected);
+          if (options[item].qtySelected + incrementValue < maxValue + 1) {
+            options[item].qtySelected =
+              options[item].qtySelected + incrementValue;
+            options[item].totalPrice =
+              options[item].value * options[item].qtySelected;
           }
         }
       }
-      if(containsItem === false){
+      if (containsItem === false) {
         const newItem = {
           label: responseObject.options[option].label,
           value: responseObject.options[option].price.value,
           qtySelected: incrementValue,
-          lastCorrectQty: incrementValue
+          lastCorrectQty: incrementValue,
+          totalPrice: responseObject.options[option].price.value,
         };
         const newItems = [...options, newItem];
         setOptions(newItems);
       }
     }
-  }
+  } 
 
   return (
     <div className="qty-rocker">
