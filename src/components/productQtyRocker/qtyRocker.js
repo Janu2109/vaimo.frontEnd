@@ -1,20 +1,11 @@
 import "./qtyRocker.scss";
-import minus from '../../images/minus.png';
-import plus from '../../images/plus.png';
+import minus from "../../images/minus.png";
+import plus from "../../images/plus.png";
 import { useState } from "react";
 import { useEffect } from "react";
 
 function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
-   var options = [];
-   
-    for (var i in responseObject.options) {
-      options.push({
-        label: responseObject.options[i].label,
-        price: responseObject.options[i].price.value,
-        qtySelected: 0,
-        lastCorrectQty: 0
-      });
-   }
+  const [options, setOptions] = useState([]);
 
   function OptionPrice(price) {
     const formatter = new Intl.NumberFormat("en-ZA", {
@@ -27,15 +18,40 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
     return formatter.format(price);
   }
 
-  function GetQtySelected(index){
-    return options[index].qtySelected;
-  }
-
-  function Increase(index){
-    if(options[index].qtySelected < maxValue + 1){
-      options[index].qtySelected = 5
+  function AddItem(option) {
+      console.log('Response Options', responseObject.options[option]);
+    if (options.length === 0) {
+      const newItem = {
+        label: responseObject.options[option].label,
+        value: responseObject.options[option].price.value,
+        qtySelected: incrementValue,
+        lastCorrectQty: incrementValue,
+        totalPrice: responseObject.options[option].price.value
+      };
+      const newItems = [...options, newItem];
+      setOptions(newItems);
+    } else if (options.length > 0) {
+      var containsItem = false;
+      for(var item in options){
+        if(options[item].label === responseObject.options[option].label){
+          containsItem = true;
+          if(options[item].qtySelected + incrementValue < maxValue + 1){
+            options[item].qtySelected = options[item].qtySelected + incrementValue;
+            options[item].totalPrice = (options[item].value * options[item].qtySelected);
+          }
+        }
+      }
+      if(containsItem === false){
+        const newItem = {
+          label: responseObject.options[option].label,
+          value: responseObject.options[option].price.value,
+          qtySelected: incrementValue,
+          lastCorrectQty: incrementValue
+        };
+        const newItems = [...options, newItem];
+        setOptions(newItems);
+      }
     }
-
   }
 
   return (
@@ -65,12 +81,22 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
           ))}
         </div>
         <div className="rocker-container">
-          {Object.keys(responseObject.options).map((option,index) => (
+          {Object.keys(responseObject.options).map((option, index) => (
             <>
               <div className="rocker">
-                <div className="minus" id={'minus-'+index}><img src={minus} alt='minus'/></div>
-                <div className="qty"><input className='input-field' placeholder={GetQtySelected(index)}/></div>
-                <div className="plus-active" id={'plus-'+index} onClick={() => Increase(index)}><img src={plus} alt='plus'/></div>
+                <div className="minus" id={"minus-" + index}>
+                  <img src={minus} alt="minus" />
+                </div>
+                <div className="qty">
+                  <input className="input-field" placeholder={0} />
+                </div>
+                <div
+                  className="plus-active"
+                  id={"plus-" + index}
+                  onClick={() => AddItem(option)}
+                >
+                  <img src={plus} alt="plus" />
+                </div>
               </div>
             </>
           ))}
