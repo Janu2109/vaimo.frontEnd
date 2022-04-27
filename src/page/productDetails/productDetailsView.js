@@ -15,6 +15,7 @@ import apple from "../../images/apple.svg";
 import info from '../../images/info.png';
 import envelope from '../../images/envelope.png';
 import QtyRocker from "../../components/productQtyRocker/index";
+import { toast, ToastContainer } from "react-toastify";
 
 function ProductDetailsView() {
   const baseURL = "https://fe-assignment.vaimo.net/";
@@ -396,6 +397,7 @@ function ProductDetailsView() {
         <button className="contact-btn"><img className="envelope" src={envelope}/><b>Contact the Supplier</b></button>
         </div>
       </div>
+      <ToastContainer closeButton={false} position="bottom-right" />
     </div>
   );
 }

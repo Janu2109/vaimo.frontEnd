@@ -2,6 +2,8 @@ import "./qtyRocker.scss";
 import minus from "../../images/minus.png";
 import plus from "../../images/plus.png";
 import { useState } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
 
 function QtyRockerView({ responseObject, minValue, maxValue, incrementValue, setProductList }) {
   const [options, setOptions] = useState([]);
@@ -56,7 +58,6 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue, set
         setProductList(options);
       }
     }
-    console.log("New Price", options);
   }
 
   function DecreaseItem(option) {
@@ -145,7 +146,51 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue, set
         }
       }
     }
-    console.log(options);
+  }
+
+  function GetQuantitySelected(option){
+    var itemInOptions = false;
+    if(options.length > 0){
+      for(var item in options){
+        if(options[item].label === responseObject.options[option].label){
+          itemInOptions = true;
+          console.log()
+          return options[item].qtySelected;
+        }
+      }
+     
+    }
+    if(itemInOptions === false){
+      return 0;
+    }
+  }
+
+  function BlurEvent(id, value, option){
+    var input = document.getElementById(id);
+    if(value < minValue || value > maxValue){
+      if(options.length < 1){
+        toast.warning('Value not accepted', {
+          position: "top-right",
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+        });
+      }else if(options.length > 0){
+        for(var item in options){
+          if(options[item].label === responseObject.options[option].label){
+            input.value = options[item].lastCorrectQty;
+            toast.warning('Value not accepted', {
+              position: "top-right",
+              pauseOnHover: true,
+              draggable: false,
+              progress: undefined,
+            });
+          }
+        }
+      }else{
+        input.value = 0;
+      }
+    }
   }
 
   return (
@@ -179,7 +224,7 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue, set
             <>
               <div className="rocker">
                 <div
-                  className="minus"
+                  className='minus-active'
                   id={"minus-" + index}
                   onClick={() => DecreaseItem(option)}
                 >
@@ -187,13 +232,15 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue, set
                 </div>
                 <div className="qty">
                   <input
+                    id={'input' + index}
                     className="input-field"
-                    placeholder={0}
+                    placeholder={GetQuantitySelected(option)}
                     onChange={(e) => InputChange(e.currentTarget.value, option)}
+                    onBlur={(e) => BlurEvent(e.currentTarget.id, e.currentTarget.value, option)}
                   />
                 </div>
                 <div
-                  className="plus-active"
+                  className='plus-active'
                   id={"plus-" + index}
                   onClick={() => AddItem(option)}
                 >
@@ -204,6 +251,7 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue, set
           ))}
         </div>
       </div>
+      
     </div>
   );
 }
