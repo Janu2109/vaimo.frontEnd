@@ -54,7 +54,22 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
         setOptions(newItems);
       }
     }
+    console.log('New Price', options);
   } 
+
+  function DecreaseItem(option) {
+    if(options.length > 0){
+      for (var item in options) {
+        if (options[item].label === responseObject.options[option].label) {
+          if (options[item].qtySelected - incrementValue > minValue - 1) {
+            options[item].qtySelected = options[item].qtySelected - incrementValue;
+            options[item].totalPrice = options[item].value * options[item].qtySelected;
+          }
+        }
+      }
+      console.log(options);
+    }
+  }
 
   return (
     <div className="qty-rocker">
@@ -86,7 +101,7 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
           {Object.keys(responseObject.options).map((option, index) => (
             <>
               <div className="rocker">
-                <div className="minus" id={"minus-" + index}>
+                <div className="minus" id={"minus-" + index} onClick={() => DecreaseItem(option)}>
                   <img src={minus} alt="minus" />
                 </div>
                 <div className="qty">
