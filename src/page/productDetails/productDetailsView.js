@@ -35,8 +35,6 @@ function ProductDetailsView() {
 
   const [productList, setProductList] = useState([]);
 
-  console.log(productList);
-
   const [responseObject, setResponseObject] = useState({
     name: "",
     tags: [],
@@ -239,6 +237,48 @@ function ProductDetailsView() {
     );
   });
 
+  const productsUi = [];
+
+  var totalCost ='';
+
+  const formatter = new Intl.NumberFormat("en-ZA", {
+    style: "currency",
+    currency: "ZAR",
+    minimumFractionDigits: 2,
+  });
+
+  
+    if(productList.length > 0){
+      const formatter = new Intl.NumberFormat("en-ZA", {
+        style: "currency",
+        currency: "ZAR",
+        minimumFractionDigits: 2,
+      });
+      for(var item in productList){
+        if(productList[item].qtySelected > 0){
+          productsUi.push(
+            <>
+            <span className='label'>
+              {productList[item].label}
+            </span>
+            <span className="price">
+            {formatter.format(productList[item].totalPrice)}
+            </span>
+            <br />
+            </>
+          )
+        }
+      }
+    }
+
+    if(productList.length > 0){
+      
+      for(var item in productList){
+        totalCost = totalCost + productList[item].totalPrice;
+      }
+    }
+  
+
   return (
     <div className="container">
       <ProductImage source={responseObject.gallery[0].main} />
@@ -332,7 +372,7 @@ function ProductDetailsView() {
         </div>
       </div>
       <div className="add-container">
-        <div className="product-list"></div>
+        <div className="product-list">{productsUi}{productList.length > 0 && <hr/>}</div>
         <div className="left-top">
           {" "}
           <span className="ship-title">
