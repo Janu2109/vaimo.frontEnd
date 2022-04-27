@@ -33,6 +33,10 @@ function ProductDetailsView() {
 
   const increment = 1;
 
+  const [productList, setProductList] = useState([]);
+
+  console.log(productList);
+
   const [responseObject, setResponseObject] = useState({
     name: "",
     tags: [],
@@ -310,7 +314,7 @@ function ProductDetailsView() {
           <img className="discount-clock" src={clock} alt="Discount clock" />
           {timerComponents}
         </div>
-          <QtyRocker responseObject={responseObject} minValue={minValue} maxValue={maxValue} incrementValue={increment}/>
+          <QtyRocker responseObject={responseObject} minValue={minValue} maxValue={maxValue} incrementValue={increment} setProductList={setProductList}/>
         <div className="trade-assurance">
           <img src={securityLock} alt="Security lock" />
           <span className="main-text">Trade Assurance</span>
@@ -328,6 +332,7 @@ function ProductDetailsView() {
         </div>
       </div>
       <div className="add-container">
+        <div className="product-list"></div>
         <div className="left-top">
           {" "}
           <span className="ship-title">

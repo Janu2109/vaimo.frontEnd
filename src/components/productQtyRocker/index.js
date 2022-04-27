@@ -1,8 +1,8 @@
 import QtyRockerView from "./qtyRocker";
 
-function QtyRocker({responseObject, minValue, maxValue, incrementValue}){
+function QtyRocker({responseObject, minValue, maxValue, incrementValue, setProductList}){
     return(
-        <QtyRockerView responseObject={responseObject} minValue={minValue} maxValue={maxValue} incrementValue={incrementValue}/>
+        <QtyRockerView responseObject={responseObject} minValue={minValue} maxValue={maxValue} incrementValue={incrementValue} setProductList={setProductList}/>
     )
 }
 

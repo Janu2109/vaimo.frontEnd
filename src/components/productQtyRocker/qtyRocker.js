@@ -2,9 +2,8 @@ import "./qtyRocker.scss";
 import minus from "../../images/minus.png";
 import plus from "../../images/plus.png";
 import { useState } from "react";
-import { useEffect } from "react";
 
-function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
+function QtyRockerView({ responseObject, minValue, maxValue, incrementValue, setProductList }) {
   const [options, setOptions] = useState([]);
 
   function OptionPrice(price) {
@@ -29,6 +28,7 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
       };
       const newItems = [...options, newItem];
       setOptions(newItems);
+      setProductList(options);
     } else if (options.length > 0) {
       var containsItem = false;
       for (var item in options) {
@@ -39,6 +39,7 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
               options[item].qtySelected + incrementValue;
             options[item].totalPrice =
               options[item].value * options[item].qtySelected;
+              setProductList(options);
           }
         }
       }
@@ -52,23 +53,99 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
         };
         const newItems = [...options, newItem];
         setOptions(newItems);
+        setProductList(options);
       }
     }
-    console.log('New Price', options);
-  } 
+    console.log("New Price", options);
+  }
 
   function DecreaseItem(option) {
-    if(options.length > 0){
+    if (options.length > 0) {
       for (var item in options) {
         if (options[item].label === responseObject.options[option].label) {
           if (options[item].qtySelected - incrementValue > minValue - 1) {
-            options[item].qtySelected = options[item].qtySelected - incrementValue;
-            options[item].totalPrice = options[item].value * options[item].qtySelected;
+            options[item].qtySelected =
+              options[item].qtySelected - incrementValue;
+            options[item].totalPrice =
+              options[item].value * options[item].qtySelected;
+              setProductList(options);
           }
         }
       }
       console.log(options);
     }
+  }
+
+  function InputChange(input, option) {
+    if (options.length === 0) {
+      if (input > minValue - 1 && input < maxValue + 1) {
+        const newItem = {
+          label: responseObject.options[option].label,
+          value: responseObject.options[option].price.value,
+          qtySelected: input,
+          lastCorrectQty: input,
+          totalPrice: responseObject.options[option].price.value * input,
+        };
+        const newItems = [...options, newItem];
+        setOptions(newItems);
+        setProductList(options);
+      } else {
+        const newItem = {
+          label: responseObject.options[option].label,
+          value: responseObject.options[option].price.value,
+          qtySelected: minValue,
+          lastCorrectQty: minValue,
+          totalPrice:
+            responseObject.options[option].price.value *
+            options[item].qtySelected,
+        };
+        const newItems = [...options, newItem];
+        setOptions(newItems);
+        setProductList(options);
+      }
+    } else if (options.length > 0) {
+      var containsItem = false;
+      for (var item in options) {
+        if (options[item].label === responseObject.options[option].label) {
+          containsItem = true;
+          if (input > minValue - 1 && input < maxValue + 1) {
+            options[item].qtySelected = input;
+            options[item].lastCorrectQty = input;
+            options[item].totalPrice =
+              options[item].value * options[item].qtySelected;
+              setProductList(options);
+          }
+        }
+      }
+      if (containsItem === false) {
+        if (input > minValue - 1 && input < maxValue + 1) {
+          const newItem = {
+            label: responseObject.options[option].label,
+            value: responseObject.options[option].price.value,
+            qtySelected: input,
+            lastCorrectQty: input,
+            totalPrice: responseObject.options[option].price.value * input,
+          };
+          const newItems = [...options, newItem];
+          setOptions(newItems);
+          setProductList(options);
+        } else {
+          const newItem = {
+            label: responseObject.options[option].label,
+            value: responseObject.options[option].price.value,
+            qtySelected: minValue,
+            lastCorrectQty: minValue,
+            totalPrice:
+              responseObject.options[option].price.value *
+              options[item].qtySelected,
+          };
+          const newItems = [...options, newItem];
+          setOptions(newItems);
+          setProductList(options);
+        }
+      }
+    }
+    console.log(options);
   }
 
   return (
@@ -101,11 +178,19 @@ function QtyRockerView({ responseObject, minValue, maxValue, incrementValue }) {
           {Object.keys(responseObject.options).map((option, index) => (
             <>
               <div className="rocker">
-                <div className="minus" id={"minus-" + index} onClick={() => DecreaseItem(option)}>
+                <div
+                  className="minus"
+                  id={"minus-" + index}
+                  onClick={() => DecreaseItem(option)}
+                >
                   <img src={minus} alt="minus" />
                 </div>
                 <div className="qty">
-                  <input className="input-field" placeholder={0} />
+                  <input
+                    className="input-field"
+                    placeholder={0}
+                    onChange={(e) => InputChange(e.currentTarget.value, option)}
+                  />
                 </div>
                 <div
                   className="plus-active"

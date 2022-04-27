@@ -350,6 +350,11 @@
         background-color: #FFFFFF;
         border-radius: 8px;
 
+        .product-list{
+            min-height: 5vh;
+            background-color: red;
+        }
+
         .left-top {
             float: left;
             width: 45%;
